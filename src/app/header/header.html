@@ -2,6 +2,7 @@
  
  @if (userService.isConnected()) {
     <a routerLink="/">Accueil</a>
+    <a routerLink="/analysenuit">Analyse nuit</a>
     <span>Bonjour {{ userService.user()?.prenom }}</span>
     @if(!isOpened){
          <button class="avatar-btn" (click)="ouvrirUserParam()">
@@ -18,6 +19,7 @@
   @else {
     <a routerLink="/">Accueil</a>
     <a routerLink="/login">Connexion</a>
+
   }
 </nav>
 <dialog #userModal>

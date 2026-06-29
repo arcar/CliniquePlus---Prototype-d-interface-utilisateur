@@ -2,6 +2,16 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.3.
 
+
+# Pour se connecter :
+
+Nous avons ajouté dans la table personnel une colonne "password" avec pour valeur "azerty" pour toutes les lignes.
+
+La route login est : http://localhost:3000/api/users/login
+
+
+
+
 ## Development server
 
 To start a local development server, run:

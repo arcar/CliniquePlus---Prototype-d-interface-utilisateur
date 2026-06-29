@@ -1,0 +1,54 @@
+:host {
+  display: block;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background: #f7fbfc;
+  color: #1f3b4d;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  padding: 1rem 2rem;
+  background: #f5fbfc;
+  border-bottom: 1px solid #d9ecef;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #1b4f72;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+
+  &:hover {
+    background: rgba(42, 157, 143, 0.08);
+    color: #2a9d8f;
+  }
+
+  &.active {
+    background: #2a9d8f;
+    color: #ffffff;
+  }
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #d9ecef, transparent);
+  margin: 0;
+}
+
+router-outlet {
+  display: block;
+ 
+}
+
+main {
+  padding: 2rem;
+  
+}

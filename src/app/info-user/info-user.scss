@@ -1,0 +1,151 @@
+:host {
+  display: block;
+  background-color: #f0f4f9;
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.personal-info-container {
+  max-width: 840px;
+  margin: 0 auto;
+
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: #1f1f1f;
+    margin-bottom: 1.5rem;
+    padding-left: .5rem;
+  }
+}
+
+.info-card {
+  background: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  min-height: 72px;
+  border-bottom: 1px solid #f1f3f4;
+  transition: background-color .2s;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: #f8fafc;
+  }
+}
+
+.info-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 24px;
+  flex-shrink: 0;
+  color: #1f1f1f;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.info-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  .info-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1f1f1f;
+  }
+
+  .info-value {
+    margin-top: .35rem;
+    font-size: .875rem;
+    color: #5f6368;
+  }
+}
+
+/* Bouton complètement à droite */
+.edit-btn {
+  margin-left: auto;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+
+  cursor: pointer;
+  flex-shrink: 0;
+
+  transition: background .2s, transform .15s;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    color: #5f6368;
+  }
+
+  &:hover {
+    background: #e8f0fe;
+
+    svg {
+      color: #1a73e8;
+    }
+  }
+
+  &:active {
+    transform: scale(.95);
+  }
+}
+
+.avatar-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #7b1fa2;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.75rem;
+}
+
+@media (max-width: 600px) {
+  :host {
+    padding: 1rem .5rem;
+  }
+
+  .info-card {
+    border-radius: 12px;
+  }
+
+  .info-row {
+    padding: 1.25rem 1rem;
+  }
+
+  .avatar-circle {
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+  }
+}

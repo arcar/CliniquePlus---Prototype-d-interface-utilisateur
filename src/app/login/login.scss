@@ -1,0 +1,145 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 100vh;
+  padding: 2rem;
+
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+
+  background: linear-gradient(180deg, #f7fbfc 0%, #eef8fa 100%);
+}
+
+/* ===========================
+   CARTE DE CONNEXION
+=========================== */
+
+.login-form {
+  width: 100%;
+  max-width: 380px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 2rem;
+
+  background: #ffffff;
+
+  border: 1px solid #d9ecef;
+  border-radius: 14px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ===========================
+   TITRE
+=========================== */
+
+h1 {
+  margin: 0 0 1rem;
+
+  text-align: center;
+
+  color: #1b4f72;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* ===========================
+   INPUTS
+=========================== */
+
+input {
+  padding: .9rem 1rem;
+
+  border: 1px solid #cfe5e8;
+  border-radius: 8px;
+
+  font-size: .95rem;
+
+  background: #ffffff;
+  color: #1f3b4d;
+
+  transition: all .25s ease;
+
+  &:focus {
+    outline: none;
+
+    border-color: #2a9d8f;
+
+    box-shadow: 0 0 0 4px rgba(42, 157, 143, .12);
+  }
+
+  &::placeholder {
+    color: #8aa5b2;
+  }
+}
+
+/* ===========================
+   BOUTON
+=========================== */
+
+.btn {
+  margin-top: .5rem;
+
+  padding: .9rem;
+
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+  font-size: .95rem;
+
+  color: white;
+  background: #2a9d8f;
+
+  transition: all .25s ease;
+
+  &:hover:not(:disabled) {
+    background: #24877d;
+    transform: translateY(-2px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+  }
+}
+
+/* ===========================
+   MESSAGE
+=========================== */
+
+.message {
+  margin-top: 1.5rem;
+
+  text-align: center;
+
+  color: #2a9d8f;
+  font-weight: 600;
+  font-size: .95rem;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 480px) {
+
+  :host {
+    padding: 1rem;
+  }
+
+  .login-form {
+    padding: 1.5rem;
+  }
+}

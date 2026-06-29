@@ -1,0 +1,29 @@
+<nav>
+ 
+ @if (userService.isConnected()) {
+    <a routerLink="/">Accueil</a>
+    <span>Bonjour {{ userService.user()?.prenom }}</span>
+    @if(!isOpened){
+         <button class="avatar-btn" (click)="ouvrirUserParam()">
+  <span>{{ userService.user()?.prenom?.charAt(0)?.toUpperCase() }}</span>
+</button>
+    }
+    @else {
+         <button class="avatar-btn" (click)="fermerUserParam()">
+  <span>{{ userService.user()?.prenom?.charAt(0)?.toUpperCase() }}</span>
+</button>
+    }
+   
+  }
+  @else {
+    <a routerLink="/">Accueil</a>
+    <a routerLink="/login">Connexion</a>
+  }
+</nav>
+<dialog #userModal>
+
+    <a routerLink="/infouser" (click)="fermerUserParam()">Mon profil</a>
+  
+    <a (click)="userService.logOut()" (click)="fermerUserParam()" routerLink="/" class="logout">Se déconnecter</a>
+  
+</dialog>

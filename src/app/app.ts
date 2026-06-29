@@ -1,12 +1,20 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Userservice } from './userservice';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { Header } from './header/header';
+
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [RouterLink, RouterOutlet, Header],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('CliniquePlus');
+  constructor(protected userService : Userservice) {
+
+  }
+  
 }

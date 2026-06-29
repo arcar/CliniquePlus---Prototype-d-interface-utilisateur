@@ -1,0 +1,12 @@
+<div class="home-container">
+  <p>Bienvenue sur le site de CliniquePlus</p>
+@if (userService.isConnected()) {
+    
+  }
+  @else {
+      <a routerLink="/login">
+    <button class="btn">CONNEXION</button>
+  </a>
+  }
+
+</div>

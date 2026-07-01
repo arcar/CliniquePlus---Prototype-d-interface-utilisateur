@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Userservice } from '../userservice';
+import { Routes } from '../routes';
 import { RouterLink} from '@angular/router';
 
 @Component({
@@ -9,7 +10,7 @@ import { RouterLink} from '@angular/router';
   styleUrl: './header.scss',
 })
 export class Header {
-  constructor(protected userService : Userservice) {
+  constructor(protected userService : Userservice, protected routes : Routes) {
     
 
   }

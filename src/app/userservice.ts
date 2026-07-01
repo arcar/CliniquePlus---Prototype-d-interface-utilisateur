@@ -9,8 +9,9 @@ export class Userservice {
 
     isConnected = signal(false);
     message = signal("");
-    user = signal<{email?: string, password?: string, prenom?: string, nom?:string, telephone?:string,date_embauche?: string, id? : string}>({});
-
+    user = signal<{email?: string, password?: string, prenom?: string, nom?:string, telephone?:string,date_embauche?: string, id_personnel? : number}>({});
+    id_personnel = signal<any>(1)
+    
     logOut(){
       this.isConnected.update(v => false);
     }
@@ -18,8 +19,7 @@ export class Userservice {
     connectUser(email:string, password :string) {
     return this.http.post('http://localhost:3000/api/users/login',{
       email,
-      password,
-      
+      password,   
       
     });
 }

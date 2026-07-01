@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { Userservice } from './userservice';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { Header } from './header/header';
+import { Routes } from './routes';
 
 
 
@@ -13,7 +14,7 @@ import { Header } from './header/header';
   styleUrl: './app.scss'
 })
 export class App {
-  constructor(protected userService : Userservice) {
+  constructor(protected userService : Userservice, protected routes : Routes) {
 
   }
   

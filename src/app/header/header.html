@@ -2,7 +2,8 @@
  
  @if (userService.isConnected()) {
     <a routerLink="/">Accueil</a>
-    <a routerLink="/analysenuit">Analyse nuit</a>
+    <a routerLink="/analysenuit" >Analyse nuit</a>
+    <span>Compte : {{ routes.job()?.source?.toUpperCase() }}</span>
     <span>Bonjour {{ userService.user()?.prenom }}</span>
     @if(!isOpened){
          <button class="avatar-btn" (click)="ouvrirUserParam()">

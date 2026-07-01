@@ -9,6 +9,6 @@ export const routes: Routes = [
     { path: '', component: HomePage },
     { path: 'login', component: Login },
     { path: 'infouser', component: InfoUser },
-    { path: 'analysenuit', component: AnalyseNuit },
+    { path: 'analysenuit', component: AnalyseNuit,  runGuardsAndResolvers: 'always'},
     { path: '**', redirectTo: '' }
 ];

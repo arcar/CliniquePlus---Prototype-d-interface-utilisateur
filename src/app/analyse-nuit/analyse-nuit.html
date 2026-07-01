@@ -1,0 +1,40 @@
+<select [(ngModel)]="selectedNuit" [disabled]="loadingNuits || !nuits.length">
+  <option [ngValue]="null">
+    Choisir la nuit à analyser
+  </option>
+
+  <option *ngFor="let nuit of nuits" [ngValue]="nuit">
+    Nuit : {{ nuit.id_nuit }}
+  </option>
+</select>
+
+<select [(ngModel)]="selectedMedecin" [disabled]="loadingMedecins || !docs.length">
+  <option [ngValue]="null">
+    Choisir le médecin validateur
+  </option>
+
+  <option *ngFor="let doc of docs" [ngValue]="doc">
+    Docteur : {{ doc.prenom }} {{ doc.nom }} : id {{doc.id_personnel}}
+  </option>
+</select>
+
+
+<form [formGroup]="commentForm" (ngSubmit)="submit()">
+
+  <label for="comment">Commentaire médical pour médecin validateur</label>
+
+  <textarea
+    id="comment"
+    formControlName="comment"
+    rows="4"
+    placeholder="Saisir votre commentaire">
+  </textarea>
+
+  <div *ngIf="commentForm.get('comment')?.invalid && commentForm.get('comment')?.touched">
+    Commentaire invalide
+  </div>
+
+  <button type="submit" [disabled]="commentForm.invalid">
+    Envoyer
+  </button>
+</form>

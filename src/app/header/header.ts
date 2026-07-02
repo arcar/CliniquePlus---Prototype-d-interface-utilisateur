@@ -1,7 +1,13 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  ViewChild
+} from '@angular/core';
+
 import { Userservice } from '../userservice';
 import { Routes } from '../routes';
-import { RouterLink} from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,21 +16,79 @@ import { RouterLink} from '@angular/router';
   styleUrl: './header.scss',
 })
 export class Header {
-  constructor(protected userService : Userservice, protected routes : Routes) {
-    
 
-  }
+  constructor(
+    protected userService: Userservice,
+    protected routes: Routes
+  ) {}
 
   isOpened = false;
-  @ViewChild('userModal') modal!: ElementRef<HTMLDialogElement>;
 
- ouvrirUserParam() {
-      this.modal.nativeElement.show();
-      this.isOpened = true;
+  @ViewChild('avatarBtn', { read: ElementRef })
+  avatarBtn!: ElementRef<HTMLButtonElement>;
+
+  @ViewChild('dropdownMenu', { read: ElementRef })
+  dropdownMenu!: ElementRef<HTMLDivElement>;
+
+  /* =========================
+     TOGGLE
+  ========================== */
+  toggleUserMenu() {
+    this.isOpened = !this.isOpened;
+
+    if (this.isOpened) {
+      this.updatePosition();
+    }
+  }
+
+  ouvrirUserParam() {
+    this.isOpened = true;
+    this.updatePosition();
   }
 
   fermerUserParam() {
-    this.modal.nativeElement.close();
     this.isOpened = false;
+  }
+
+  /* =========================
+     CLICK OUTSIDE + ESC
+  ========================== */
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    if (!this.isOpened) return;
+
+    const target = event.target as HTMLElement;
+
+    const clickedAvatar =
+      this.avatarBtn?.nativeElement.contains(target);
+
+    const clickedDropdown =
+      this.dropdownMenu?.nativeElement.contains(target);
+
+    if (!clickedAvatar && !clickedDropdown) {
+      this.fermerUserParam();
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEsc() {
+    if (this.isOpened) {
+      this.fermerUserParam();
+    }
+  }
+
+  /* =========================
+     POSITION RIGHT ALIGN
+  ========================== */
+  updatePosition() {
+    const rect = this.avatarBtn.nativeElement.getBoundingClientRect();
+
+    const rightOffset = window.innerWidth - rect.right;
+
+    document.documentElement.style.setProperty(
+      '--menu-right',
+      `${rightOffset}px`
+    );
   }
 }

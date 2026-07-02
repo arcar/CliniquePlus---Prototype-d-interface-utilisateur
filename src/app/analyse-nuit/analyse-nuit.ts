@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Routes } from '../routes';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
-import { MedecinsResponse } from '../routes';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 interface Nuit {
   id_nuit: number;
@@ -34,7 +32,7 @@ interface Medecin {
 @Component({
   selector: 'app-analyse-nuit',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './analyse-nuit.html',
   styleUrl: './analyse-nuit.scss',
 })
@@ -43,29 +41,25 @@ export class AnalyseNuit implements OnInit {
   commentForm: FormGroup;
 
   nuits: Nuit[] = [];
-  selectedNuit: Nuit | null = null;
-  loadingNuits = true;
+  docs: Medecin[] = [];
 
-  docs : Medecin[] = [];
-  selectedMedecin: Medecin | null = null;
-  loadingMedecins = true;
+  loadingNuits = false;
+  loadingMedecins = false;
 
   constructor(
     private router: Router,
     protected routes: Routes,
     private cdr: ChangeDetectorRef,
-    private fb : FormBuilder
+    private fb: FormBuilder,
+    private http: HttpClient
   ) {
+
     this.commentForm = this.fb.group({
+      selectedNuit: [null, Validators.required],
+      selectedMedecin: [null, Validators.required],
       comment: ['', [Validators.required, Validators.minLength(3)]]
     });
-    
-  }
 
-  submit() {
-    if (this.commentForm.valid) {
-      console.log(this.commentForm.value.comment);
-    }
   }
 
   ngOnInit(): void {
@@ -74,89 +68,82 @@ export class AnalyseNuit implements OnInit {
     this.loadMedecins();
   }
 
+  // =========================
+  // NUITS
+  // =========================
   loadNuits() {
-  this.loadingNuits = true;
+    this.loadingNuits = true;
 
-  this.routes.listeNuits().subscribe({
-    next: (response: ApiResponse) => {
-
-      this.nuits = response.nuitsTrouvees ?? [];
-
-      this.selectedNuit = null;
-
-      this.loadingNuits = false; 
-
-      this.cdr.detectChanges(); 
-
-      console.log('loaded nuits:', this.nuits);
-    },
-    error: (err) => {
-      console.error(err);
-      this.loadingNuits = false;
-    }
-  });
-}
-
-  findNuit() {
     this.routes.listeNuits().subscribe({
       next: (response: ApiResponse) => {
 
         this.nuits = response.nuitsTrouvees ?? [];
 
-        console.log('debug first:', this.nuits?.[0]);
+        this.loadingNuits = false;
 
-        this.routes.id_nuit.update(u => ({
-          ...u
-        }));
+        this.cdr.detectChanges();
 
-        const nuits = this.routes.nuitTrouvee();
-
-        nuits.forEach((element) => {
-          console.log(element);
-        });
+        console.log('loaded nuits:', this.nuits);
       },
-      error: (err) => console.error(err)
+      error: (err) => {
+        console.error(err);
+        this.loadingNuits = false;
+      }
     });
   }
 
+  // =========================
+  // MEDECINS
+  // =========================
   loadMedecins() {
-  this.loadingMedecins = true;
+    this.loadingMedecins = true;
 
-  this.routes.listeMedecins().subscribe({
-    next: (response: MedecinsResponse) => {
+    this.routes.listeMedecins().subscribe({
+      next: (response: any) => {
 
-      this.docs = response.medecin ?? [];
+        this.docs = response.medecin ?? [];
 
-      this.selectedMedecin = null;
+        this.loadingMedecins = false;
 
-      this.loadingMedecins = false; 
+        this.cdr.detectChanges();
 
-      this.cdr.detectChanges(); 
+        console.log('loaded medecins:', this.docs);
+      },
+      error: (err) => {
+        console.error(err);
+        this.loadingMedecins = false;
+      }
+    });
+  }
 
-      console.log('loaded medecins:', this.docs);
-    },
-    error: (err) => {
-      console.error(err);
-      this.loadingMedecins = false;
+  // =========================
+  // SUBMIT ETL
+  // =========================
+  submit() {
+
+    if (this.commentForm.invalid) return;
+
+    const { selectedNuit, selectedMedecin, comment } = this.commentForm.value;
+
+    if (!selectedNuit || !selectedMedecin) {
+      alert("Sélection manquante.");
+      return;
     }
-  });
-}
 
-    findMedecin() {
-      this.routes.listeMedecins().subscribe({
-        next: (response: MedecinsResponse) => {
-          this.docs = response.medecin ?? [];
+    this.routes.lancerETL1(
+      selectedNuit.id_nuit,
+      selectedMedecin.id_personnel,
+      comment
+    ).subscribe({
+      next: (res) => {
+        console.log("ETL lancé :", res);
 
-          console.log('debug first:', this.docs?.[0]);
-
-        
-          const medecins = this.routes.medecinTrouve();
-
-          medecins.forEach((element) => {
-            console.log(element);
-          });
-        },
-        error: (err) => console.error(err)
-      });
-    }
+        // reset propre après succès
+        this.commentForm.reset();
+      },
+      error: (err) => {
+        console.error("Erreur ETL :", err);
+      }
+    });
+  }
 }

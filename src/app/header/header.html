@@ -1,32 +1,73 @@
 <nav>
- 
- @if (userService.isConnected()) {
-    <a routerLink="/">Accueil</a>
-    <a routerLink="/analysenuit" >Analyse nuit</a>
-    <span>Compte : {{ routes.job()?.source?.toUpperCase() }}</span>
-    <span>Bonjour {{ userService.user()?.prenom }}</span>
-    @if(!isOpened){
-         <button class="avatar-btn" (click)="ouvrirUserParam()">
-  <span>{{ userService.user()?.prenom?.charAt(0)?.toUpperCase() }}</span>
-</button>
-    }
-    @else {
-         <button class="avatar-btn" (click)="fermerUserParam()">
-  <span>{{ userService.user()?.prenom?.charAt(0)?.toUpperCase() }}</span>
-</button>
-    }
-   
-  }
-  @else {
-    <a routerLink="/">Accueil</a>
-    <a routerLink="/login">Connexion</a>
+  @if (userService.isConnected()) {
+
+    <!-- =========================
+         LEFT NAV
+    ========================== -->
+    <div class="nav-left">
+      <a routerLink="/">Accueil</a>
+      <a routerLink="/analysenuit">Analyse nuit</a>
+    </div>
+
+    <!-- =========================
+         CENTER (compte)
+    ========================== -->
+    <div class="nav-center">
+      <span class="job-label">
+        Compte : {{ routes.job()?.source?.toUpperCase() }}
+      </span>
+    </div>
+
+    <!-- =========================
+         RIGHT USER AREA
+    ========================== -->
+    <div class="user-section">
+
+      <span class="user-text">
+        Bonjour {{ userService.user()?.prenom }}
+      </span>
+
+      <button
+        #avatarBtn
+        class="avatar-btn"
+        type="button"
+        (click)="toggleUserMenu()">
+
+        <span>
+          {{ userService.user()?.prenom?.charAt(0)?.toUpperCase() }}
+        </span>
+
+      </button>
+
+      @if (isOpened) {
+        <div class="dropdown" #dropdownMenu>
+
+          <a routerLink="/infouser" (click)="fermerUserParam()">
+            Mon profil
+          </a>
+
+          <a
+            class="logout"
+            routerLink="/"
+            (click)="userService.logOut(); fermerUserParam()">
+
+            Se déconnecter
+          </a>
+
+        </div>
+      }
+
+    </div>
+
+  } @else {
+
+    <!-- =========================
+         GUEST MODE
+    ========================== -->
+    <div class="nav-left">
+      <a routerLink="/">Accueil</a>
+      <a routerLink="/login">Connexion</a>
+    </div>
 
   }
 </nav>
-<dialog #userModal>
-
-    <a routerLink="/infouser" (click)="fermerUserParam()">Mon profil</a>
-  
-    <a (click)="userService.logOut()" (click)="fermerUserParam()" routerLink="/" class="logout">Se déconnecter</a>
-  
-</dialog>

@@ -1,40 +1,83 @@
-<select [(ngModel)]="selectedNuit" [disabled]="loadingNuits || !nuits.length">
-  <option [ngValue]="null">
-    Choisir la nuit à analyser
-  </option>
+<div class="container">
 
-  <option *ngFor="let nuit of nuits" [ngValue]="nuit">
-    Nuit : {{ nuit.id_nuit }}
-  </option>
-</select>
+  <div class="card">
 
-<select [(ngModel)]="selectedMedecin" [disabled]="loadingMedecins || !docs.length">
-  <option [ngValue]="null">
-    Choisir le médecin validateur
-  </option>
+    <h2>Analyse d'une nuit</h2>
 
-  <option *ngFor="let doc of docs" [ngValue]="doc">
-    Docteur : {{ doc.prenom }} {{ doc.nom }} : id {{doc.id_personnel}}
-  </option>
-</select>
+    <p class="subtitle">
+      Sélectionnez la nuit à analyser ainsi que le médecin validateur.
+    </p>
 
+    <form [formGroup]="commentForm" (ngSubmit)="submit()">
 
-<form [formGroup]="commentForm" (ngSubmit)="submit()">
+      <div class="row">
 
-  <label for="comment">Commentaire médical pour médecin validateur</label>
+        <div class="field">
 
-  <textarea
-    id="comment"
-    formControlName="comment"
-    rows="4"
-    placeholder="Saisir votre commentaire">
-  </textarea>
+          <label>Nuit à analyser</label>
 
-  <div *ngIf="commentForm.get('comment')?.invalid && commentForm.get('comment')?.touched">
-    Commentaire invalide
+          <select formControlName="selectedNuit"
+                  [disabled]="loadingNuits || !nuits.length">
+
+            <option [ngValue]="null">
+              Choisir une nuit
+            </option>
+
+            <option *ngFor="let nuit of nuits" [ngValue]="nuit">
+              Nuit n° {{ nuit.id_nuit }}
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="field">
+
+          <label>Médecin validateur</label>
+
+          <select formControlName="selectedMedecin"
+                  [disabled]="loadingMedecins || !docs.length">
+
+            <option [ngValue]="null">
+              Choisir un médecin
+            </option>
+
+            <option *ngFor="let doc of docs" [ngValue]="doc">
+              Dr {{ doc.prenom }} {{ doc.nom }} : {{ doc.specialite }}
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <div class="field">
+
+        <label for="comment">Commentaire médical pour médecin validateur</label>
+
+        <textarea
+          id="comment"
+          formControlName="comment"
+          rows="6"
+          placeholder="Saisir un commentaire destiné au médecin validateur...">
+        </textarea>
+
+        <small class="error"
+               *ngIf="commentForm.get('comment')?.invalid && commentForm.get('comment')?.touched">
+
+          Commentaire invalide
+
+        </small>
+
+      </div>
+
+      <button class="btn" type="submit" [disabled]="commentForm.invalid">
+        Lancer ETL 1
+      </button>
+
+    </form>
+
   </div>
 
-  <button type="submit" [disabled]="commentForm.invalid">
-    Envoyer
-  </button>
-</form>
+</div>

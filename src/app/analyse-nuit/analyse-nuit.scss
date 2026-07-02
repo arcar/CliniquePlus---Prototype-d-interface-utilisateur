@@ -1,29 +1,246 @@
-.list-view {
-    background: #FFFFFF;
-    color: #444444;
-    box-shadow: 3px 0 3px 0 rgba(0,0,0,0.1), 0 2px 2px 0 rgba(0,0,0,0.15);
-    max-height: 250px;
-    overflow-y: auto;
-    position: absolute;
-    user-select: none;
-    z-index: 9999;
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    & > div {
-        align-items: stretch;
-        justify-content: stretch;
-        border-bottom: 1px solid #AAAAAA;
-        cursor: pointer;
-        display: flex;
-        flex-direction: row;
-        font-size: 1rem;
-        line-height: 29px;
-        padding: 5px 10px;
+  min-height: 100vh;
+  padding: 2rem;
 
-        &:hover {
-            background: #AAAAAA;
-        }
-        &:last-child {
-            border-bottom: none;
-        }
-    }
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+
+  background: linear-gradient(180deg, #f7fbfc 0%, #eef8fa 100%);
+}
+
+/* ===========================
+   CONTENEUR
+=========================== */
+
+.container {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* ===========================
+   CARTE
+=========================== */
+
+.card {
+
+  background: white;
+
+  border-radius: 16px;
+
+  padding: 2.5rem;
+
+  border: 1px solid #d9ecef;
+
+  box-shadow:
+      0 12px 35px rgba(0,0,0,.08);
+
+}
+
+/* ===========================
+   TITRES
+=========================== */
+
+h2{
+
+  margin:0;
+
+  color:#1b4f72;
+
+  font-size:2rem;
+
+}
+
+.subtitle{
+
+  margin:.5rem 0 2rem;
+
+  color:#6d8792;
+
+}
+
+/* ===========================
+   FORMULAIRE
+=========================== */
+
+form{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:2rem;
+
+}
+
+/* ===========================
+   LIGNE
+=========================== */
+
+.row{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:1.5rem;
+
+}
+
+/* ===========================
+   CHAMP
+=========================== */
+
+.field{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:.6rem;
+
+}
+
+label{
+
+  font-weight:600;
+
+  color:#1b4f72;
+
+}
+
+select,
+textarea{
+
+  padding:1rem;
+
+  border:1px solid #cfe5e8;
+
+  border-radius:10px;
+
+  font-size:.95rem;
+
+  font-family:inherit;
+
+  background:white;
+
+  transition:.25s;
+
+}
+
+textarea{
+
+  resize:vertical;
+
+  min-height:140px;
+
+}
+
+select:focus,
+textarea:focus{
+
+  outline:none;
+
+  border-color:#2a9d8f;
+
+  box-shadow:0 0 0 4px rgba(42,157,143,.12);
+
+}
+
+select:disabled{
+
+  background:#f5f5f5;
+
+  color:#999;
+
+}
+
+/* ===========================
+   ERREUR
+=========================== */
+
+.error{
+
+  color:#dc3545;
+
+  font-size:.85rem;
+
+}
+
+/* ===========================
+   BOUTON
+=========================== */
+
+.btn{
+
+  align-self:flex-end;
+
+  min-width:220px;
+
+  padding:1rem 2rem;
+
+  border:none;
+
+  border-radius:10px;
+
+  background:#2a9d8f;
+
+  color:white;
+
+  font-size:1rem;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+}
+
+.btn:hover:not(:disabled){
+
+  background:#24877d;
+
+  transform:translateY(-2px);
+
+  box-shadow:0 8px 20px rgba(42,157,143,.25);
+
+}
+
+.btn:disabled{
+
+  opacity:.5;
+
+  cursor:not-allowed;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:700px){
+
+.row{
+
+grid-template-columns:1fr;
+
+}
+
+.card{
+
+padding:1.5rem;
+
+}
+
+.btn{
+
+width:100%;
+
+align-self:stretch;
+
+}
+
 }

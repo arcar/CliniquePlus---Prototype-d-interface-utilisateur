@@ -40,7 +40,7 @@ export interface MedecinsResponse {
   providedIn: 'root',
 })
 export class Routes {
-    constructor(private http: HttpClient){};
+    constructor(private http: HttpClient){}; 
 
     job = signal<{id_personnel?:number, source?: string}>({});
     id_nuit = signal<{id_nuit?:number}>({});
@@ -75,4 +75,19 @@ export class Routes {
       
     });
 }
+  lancerETL1(
+  id_nuit: number,
+  id_medecin_validateur: number,
+  commentaire_medical: string
+) {
+  return this.http.get('http://localhost:3000/lancerETL1', {
+    params: {
+            id_nuit,
+    id_medecin_validateur,
+    commentaire_medical
+        }
+    
+  });
+}
+   
 }

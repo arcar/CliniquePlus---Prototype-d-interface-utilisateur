@@ -82,6 +82,8 @@ export class Login {
         this.userService.message.set("Erreur connexion");
       }
     });
+    console.log(this.routes.job());
+console.log(this.routes.isInfirmier);
   }
  
 }

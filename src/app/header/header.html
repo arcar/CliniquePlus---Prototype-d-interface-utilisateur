@@ -1,12 +1,28 @@
 <nav>
   @if (userService.isConnected()) {
 
+    
+
     <!-- =========================
          LEFT NAV
     ========================== -->
     <div class="nav-left">
+      @if(routes.isInfirmier){
+
       <a routerLink="/">Accueil</a>
       <a routerLink="/analysenuit">Analyse nuit</a>
+
+    }
+
+      @if(routes.isMedecin){
+
+      <a routerLink="/">Accueil</a>
+      <a href="http://192.168.0.211:8501" target="_blank">Dashboard</a> 
+      <a href="http://192.168.0.211:8501" target="_blank">Rapport nuit</a>
+
+    }
+      
+      
     </div>
 
     <!-- =========================

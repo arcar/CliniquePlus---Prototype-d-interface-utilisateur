@@ -42,12 +42,21 @@ export interface MedecinsResponse {
 export class Routes {
     constructor(private http: HttpClient){}; 
 
+    
     job = signal<{id_personnel?:number, source?: string}>({});
     id_nuit = signal<{id_nuit?:number}>({});
     medecin_trouve = signal<{nom?:string, prenom?:string}>({});
     nuitTrouvee = signal<NuitResponse[]>([]);
     medecinTrouve = signal<MedecinsResponse[]>([]);
     
+    get isInfirmier(): boolean {
+    return this.job().source?.toUpperCase() === 'INFIRMIER';
+    
+    }
+
+    get isMedecin(): boolean {
+    return this.job().source?.toUpperCase() === 'MEDECIN';
+    }
 
     listeNuits() {
         return this.http.get<NuitResponse>('http://localhost:3000/api/technicien/nuitDispo',{});

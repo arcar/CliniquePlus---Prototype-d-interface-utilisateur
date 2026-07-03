@@ -23,6 +23,7 @@ export class Header {
   ) {}
 
   isOpened = false;
+ 
 
   @ViewChild('avatarBtn', { read: ElementRef })
   avatarBtn!: ElementRef<HTMLButtonElement>;

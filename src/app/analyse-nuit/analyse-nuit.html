@@ -1,5 +1,5 @@
 <div class="container">
-
+ @if(routes.isInfirmier){
   <div class="card">
 
     <h2>Analyse d'une nuit</h2>
@@ -79,5 +79,15 @@
     </form>
 
   </div>
+ }
+ @else {
 
+ <div class="login-message">
+    <h1>Veuillez vous connecter</h1>
+  </div>
+    
+  
+
+
+ }
 </div>

@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Userservice } from '../userservice';
 import { DatePipe } from '@angular/common';
+import { Routes } from '../routes';
 
 @Component({
   selector: 'app-info-user',
@@ -9,7 +10,7 @@ import { DatePipe } from '@angular/common';
   styleUrl: './info-user.scss',
 })
 export class InfoUser {
-  constructor(protected userService : Userservice) {
+  constructor(protected userService : Userservice, protected routes: Routes) {
     
 
   }

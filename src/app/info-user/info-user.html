@@ -1,4 +1,7 @@
-<div class="personal-info-container">
+@if(routes.isInfirmier || routes.isMedecin){
+
+     <div class="personal-info-container">
+      
   <h1>Informations personnelles</h1>
 
   <div class="info-card">
@@ -82,3 +85,14 @@
 <dialog #phoneModal>
  
 </dialog>
+    }
+
+
+    @else {
+
+      <div class="login-message">
+    <h1>Veuillez vous connecter</h1>
+  </div>
+    
+    }
+

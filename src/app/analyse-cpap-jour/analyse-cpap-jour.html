@@ -1,0 +1,58 @@
+<div class="container">
+ @if(routes.isInfirmier){
+  <div class="card">
+
+    <h2>Analyse Cpap jour</h2>
+
+    <p class="subtitle">
+      Sélectionnez le patient pour analyse des relevés cpap jour.
+    </p>
+
+    <form [formGroup]="commentForm" (ngSubmit)="submit()">
+
+      <div class="row">
+
+        <div class="field">
+
+          <label>Patient à analyser</label>
+
+          <select formControlName="selectedPatient"
+                  [disabled]="loadingPatients || !patients.length">
+
+            <option [ngValue]="null">
+              Choisir un patient
+            </option>
+
+            <option *ngFor="let patient of patients" [ngValue]="patient">
+              Patient n° {{ patient.id_patient }}
+            </option>
+
+          </select>
+
+        </div>
+
+       
+
+      </div>
+
+    
+
+      <button class="btn" type="submit" [disabled]="commentForm.invalid">
+        Lancer ETL 2
+      </button>
+
+    </form>
+
+  </div>
+ }
+ @else {
+
+ <div class="login-message">
+    <h1>Veuillez vous connecter</h1>
+  </div>
+    
+  
+
+
+ }
+</div>

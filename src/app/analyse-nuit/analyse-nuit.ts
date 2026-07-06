@@ -137,12 +137,13 @@ export class AnalyseNuit implements OnInit {
     ).subscribe({
       next: (res) => {
         console.log("ETL lancé :", res);
-
+          
         // reset propre après succès
         this.commentForm.reset();
       },
       error: (err) => {
         console.error("Erreur ETL :", err);
+        console.log(err.error);
       }
     });
   }

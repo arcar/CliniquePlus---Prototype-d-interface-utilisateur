@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { Userservice } from './userservice';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { Header } from './header/header';
 import { Routes } from './routes';
 
@@ -9,7 +9,7 @@ import { Routes } from './routes';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, Header],
+  imports: [RouterOutlet, Header],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

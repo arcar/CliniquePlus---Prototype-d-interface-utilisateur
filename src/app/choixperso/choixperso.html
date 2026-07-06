@@ -1,0 +1,62 @@
+<div class="container">
+ @if(routes.isRh){
+  <div class="card">
+
+    <h2>Modifier les informations du personnel</h2>
+
+    <p class="subtitle">
+      Choisir le membre du personnel à modifier.
+    </p>
+
+    <form [formGroup]="commentForm" (ngSubmit)="submit()">
+
+      <div class="row">
+
+       
+
+        <div class="field">
+
+          <label>Employé à modifier</label>
+
+          <select formControlName="selectedPersonnel"
+                  [disabled]="loadingPersonnel || !perso.length">
+
+            <option [ngValue]="null">
+              Choisir un personnel
+            </option>
+
+            <option *ngFor="let pers of perso" [ngValue]="pers">
+               {{ pers.prenom }} {{ pers.nom }} - N° badge : {{pers.id_personnel}}
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+       <button
+  type="button"
+  class="btn"
+  [disabled]="commentForm.invalid"
+  (click)="goToModif()"
+>
+  Modifier personnel
+</button>
+      
+
+    </form>
+
+  </div>
+ }
+ @else {
+
+ <div class="login-message">
+    <h1>Veuillez vous connecter</h1>
+  </div>
+    
+  
+
+
+ }
+</div>

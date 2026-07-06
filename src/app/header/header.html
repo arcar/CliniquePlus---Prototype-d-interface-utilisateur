@@ -11,6 +11,8 @@
 
       <a routerLink="/">Accueil</a>
       <a routerLink="/analysenuit">Analyse nuit</a>
+      <a routerLink="/analysecpap">Suivi cpap jour</a>
+
 
     }
 
@@ -19,6 +21,13 @@
       <a routerLink="/">Accueil</a>
       <a href="http://192.168.0.211:8501" target="_blank">Dashboard</a> 
       <a href="http://192.168.0.211:8501" target="_blank">Rapport nuit</a>
+
+    }
+
+    @if(routes.isRh){
+
+      <a routerLink="/">Accueil</a>
+      <a routerLink="/choixperso">Modification personnel</a>
 
     }
       

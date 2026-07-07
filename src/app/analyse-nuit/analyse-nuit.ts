@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Routes } from '../routes';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+
 
 interface Nuit {
   id_nuit: number;
@@ -47,11 +46,11 @@ export class AnalyseNuit implements OnInit {
   loadingMedecins = false;
 
   constructor(
-    private router: Router,
+    
     protected routes: Routes,
     private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
-    private http: HttpClient
+    
   ) {
 
     this.commentForm = this.fb.group({
@@ -117,7 +116,7 @@ export class AnalyseNuit implements OnInit {
   }
 
   // =========================
-  // SUBMIT ETL
+  // Lancer ETL
   // =========================
   submit() {
 
@@ -138,7 +137,7 @@ export class AnalyseNuit implements OnInit {
       next: (res) => {
         console.log("ETL lancé :", res);
           
-        // reset propre après succès
+        // reset après succès
         this.commentForm.reset();
       },
       error: (err) => {
